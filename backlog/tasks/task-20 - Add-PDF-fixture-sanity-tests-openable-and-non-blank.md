@@ -6,7 +6,7 @@ assignee: []
 created_date: '2026-02-10 01:04'
 updated_date: '2026-02-10 01:23'
 labels: []
-milestone: 'M2: v0.2 Exports + UX — Mobile PNG + PDF auto + settings + crop MVP'
+milestone: 'm-2'
 dependencies:
   - TASK-18
   - TASK-24

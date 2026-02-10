@@ -8,7 +8,7 @@ assignee: []
 created_date: '2026-02-10 01:02'
 updated_date: '2026-02-10 01:22'
 labels: []
-milestone: 'M1: v0.1 Vertical Slice — Gmail → Desktop PNG export end-to-end'
+milestone: 'm-1'
 dependencies: []
 documentation:
   - backlog/docs/TESTING.md

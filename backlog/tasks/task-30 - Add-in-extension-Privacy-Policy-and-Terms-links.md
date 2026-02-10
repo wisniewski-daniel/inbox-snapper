@@ -6,7 +6,7 @@ assignee: []
 created_date: '2026-02-10 01:05'
 updated_date: '2026-02-10 01:24'
 labels: []
-milestone: 'M3: v0.3 Quality + Launch — PDF quality + privacy checks + legal + CWS assets'
+milestone: 'm-3'
 dependencies:
   - TASK-6
 documentation:
