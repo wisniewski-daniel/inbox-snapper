@@ -1,3 +1,11 @@
+---
+id: doc-1
+title: PROJECT
+type: other
+created_date: '2026-02-10 00:00'
+updated_date: '2026-02-10 00:00'
+---
+
 # Inbox Snapper — Phase 1 Project Spec (Canonical)
 
 ## Purpose

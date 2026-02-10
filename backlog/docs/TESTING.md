@@ -1,3 +1,11 @@
+---
+id: doc-4
+title: TESTING
+type: other
+created_date: '2026-02-10 00:00'
+updated_date: '2026-02-10 00:00'
+---
+
 > **Agent note (Codex):** Do **not** attempt to log into Gmail automatically. Use **fixtures** for automation. Gmail end-to-end checks are **manual** using a logged-in browser session.
 
 # Testing (Phase 1)

@@ -1,3 +1,11 @@
+---
+id: doc-2
+title: RELEASE
+type: other
+created_date: '2026-02-10 00:00'
+updated_date: '2026-02-10 00:00'
+---
+
 # Phase 1 Release Checklist (Chrome Web Store)
 
 This checklist is the source of truth for getting Phase 1 shipped.

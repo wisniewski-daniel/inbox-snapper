@@ -1,3 +1,11 @@
+---
+id: doc-5
+title: DECISION_RULES
+type: other
+created_date: '2026-02-10 00:00'
+updated_date: '2026-02-10 00:00'
+---
+
 # Decision Rules (When to write a decision entry)
 
 Create a decision entry in `backlog/decisions/` when any of the following happens:

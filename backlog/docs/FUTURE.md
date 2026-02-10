@@ -1,3 +1,11 @@
+---
+id: doc-3
+title: FUTURE
+type: other
+created_date: '2026-02-10 00:00'
+updated_date: '2026-02-10 00:00'
+---
+
 # Future Ideas (Non-binding, Post Phase 1)
 
 These are ideas, not requirements. Do not implement unless planned as a milestone.

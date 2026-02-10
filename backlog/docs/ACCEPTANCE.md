@@ -1,3 +1,11 @@
+---
+id: doc-6
+title: ACCEPTANCE
+type: other
+created_date: '2026-02-10 00:00'
+updated_date: '2026-02-10 00:00'
+---
+
 # Phase 1 Acceptance Criteria (Canonical)
 
 If anything conflicts with older notes, this file wins.
