@@ -1,0 +1,11 @@
+{
+  "name": "inbox-snapper",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Inbox Snapper MV3 extension scaffold",
+  "scripts": {
+    "test": "node --test",
+    "lint": "node scripts/lint.mjs",
+    "build": "node scripts/build.mjs"
+  }
+}

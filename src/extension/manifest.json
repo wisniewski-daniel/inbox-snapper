@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Inbox Snapper",
+  "version": "0.1.0",
+  "description": "Turn Gmail emails into presentation-ready mockups.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Inbox Snapper",
+    "default_popup": "action/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content/content-script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
