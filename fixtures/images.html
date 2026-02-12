@@ -2,14 +2,97 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Image Fixture</title>
+    <title>Canonical Image-Heavy Fixture</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 28px;
+        background: #fff8ef;
+        font-family: Arial, sans-serif;
+        color: #243b53;
+      }
+
+      .email {
+        max-width: 720px;
+        margin: 0 auto;
+        border: 1px solid #f0d9b5;
+        border-radius: 14px;
+        background: #ffffff;
+        overflow: hidden;
+      }
+
+      .hero {
+        width: 100%;
+        display: block;
+      }
+
+      .content {
+        padding: 20px 24px 24px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        border: 1px solid #d9e2ec;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .card img {
+        width: 100%;
+        display: block;
+      }
+
+      .card p {
+        margin: 0;
+        padding: 10px;
+      }
+    </style>
   </head>
   <body>
-    <main>
-      <h1>Image-heavy campaign</h1>
-      <p>This fixture represents a sanitized image-focused marketing email.</p>
-      <img alt="Placeholder hero image" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" />
-      <img alt="Placeholder secondary image" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" />
+    <main class="email">
+      <img
+        class="hero"
+        alt="Campaign hero banner"
+        src="https://cdn.example.invalid/assets/fixture-hero-banner.png"
+      />
+
+      <section class="content">
+        <h1>Image-forward seasonal launch</h1>
+        <p>
+          This canonical image-heavy fixture includes a hero plus product tiles so export logic can be
+          validated against layouts where visuals dominate the viewport.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <img alt="Product tile A" src="https://cdn.example.invalid/assets/tile-a.png" />
+            <p>Tile A summary for synthetic promotion set.</p>
+          </article>
+          <article class="card">
+            <img alt="Product tile B" src="https://cdn.example.invalid/assets/tile-b.png" />
+            <p>Tile B summary for synthetic promotion set.</p>
+          </article>
+          <article class="card">
+            <img alt="Product tile C" src="https://cdn.example.invalid/assets/tile-c.png" />
+            <p>Tile C summary for synthetic promotion set.</p>
+          </article>
+          <article class="card">
+            <img alt="Product tile D" src="https://cdn.example.invalid/assets/tile-d.png" />
+            <p>Tile D summary for synthetic promotion set.</p>
+          </article>
+        </div>
+
+        <p>
+          Gallery details:
+          <a href="https://assets.example.invalid/catalog/spring-grid">assets.example.invalid/catalog/spring-grid</a>
+        </p>
+        <p>Reference: FIXTURE-IMAGES-001</p>
+      </section>
     </main>
   </body>
 </html>

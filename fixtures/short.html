@@ -2,12 +2,64 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Short Fixture</title>
+    <title>Canonical Short Fixture</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 24px;
+        background: #f5f7fb;
+        font-family: Arial, sans-serif;
+        color: #1f2933;
+      }
+
+      .email {
+        max-width: 640px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #d9e2ec;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .email-header {
+        padding: 20px 24px 12px;
+        background: #102a43;
+        color: #f0f4f8;
+      }
+
+      .email-body {
+        padding: 20px 24px 24px;
+      }
+
+      .cta {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: #0b6bcb;
+        color: #ffffff;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
-    <main>
-      <h1>Product update</h1>
-      <p>Hello team, this is a short sanitized fixture email for export testing.</p>
+    <main class="email">
+      <header class="email-header">
+        <p>Northwind Studio Weekly</p>
+        <h1>Spring campaign snapshot</h1>
+      </header>
+      <section class="email-body">
+        <p>
+          This synthetic fixture models a short campaign email used for deterministic PNG and PDF fit tests.
+          It contains only fake brand and content references.
+        </p>
+        <p>
+          Highlights include a refreshed hero layout, updated call-to-action copy, and one shared visual
+          style token set.
+        </p>
+        <a class="cta" href="https://product.example.invalid/releases/spring-campaign">Read release note</a>
+        <p>Reference: FIXTURE-SHORT-001</p>
+      </section>
     </main>
   </body>
 </html>

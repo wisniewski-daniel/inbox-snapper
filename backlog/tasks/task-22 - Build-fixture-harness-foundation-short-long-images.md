@@ -1,7 +1,7 @@
 ---
 id: TASK-22
 title: Build fixture harness foundation (short/long/images)
-status: In Progress
+status: Done
 assignee:
   - '@Worker A'
 created_date: '2026-02-10 01:04'

@@ -62,6 +62,7 @@ Recommended minimum set:
 - `fixtures/short.html` (short/medium email)
 - `fixtures/long.html` (newsletter-style long email)
 - `fixtures/images.html` (image-heavy email)
+- `fixtures/README.md` (fixture authoring + sanitization workflow)
 
 ### Fixture rules (privacy)
 Fixtures must be **sanitized**:
@@ -69,6 +70,10 @@ Fixtures must be **sanitized**:
 - no real names/emails/addresses/phone numbers
 - remove/replace tracking URLs and unsubscribe tokens
 - prefer newsletters or synthetic content over personal emails
+- use only synthetic hostnames for absolute URLs (for this repo: `*.example.invalid`)
+
+Authoring and sanitizer details live in:
+- `fixtures/README.md`
 
 ## 3) Manual Gmail smoke test (required before release)
 
