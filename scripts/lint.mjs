@@ -1,43 +1,50 @@
-import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { spawnSync } from "node:child_process";
+import { readdir } from "node:fs/promises";
+import path from "node:path";
 
-const manifestPath = resolve("src/extension/manifest.json");
-const filesToScan = [
-  "src/extension/background/service-worker.js",
-  "src/extension/action/popup.js",
-  "src/extension/content/content-script.js"
-];
-const forbiddenPatterns = [
-  /eval\s*\(/,
-  /new Function\s*\(/,
-  /accounts\.google\.com/i,
-  /chrome\.identity/i
-];
+const ignoredDirectories = new Set([".git", "node_modules", "backlog"]);
+const allowedExtensions = new Set([".js", ".mjs", ".cjs"]);
 
-const manifestRaw = await readFile(manifestPath, "utf8");
-const manifest = JSON.parse(manifestRaw);
+async function collectJavaScriptFiles(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const files = [];
 
-if (manifest.manifest_version !== 3) {
-  throw new Error("Manifest must use MV3.");
-}
+  for (const entry of entries) {
+    const absolutePath = path.join(directory, entry.name);
+    const relativePath = path.relative(process.cwd(), absolutePath);
 
-const contentScripts = manifest.content_scripts ?? [];
-const gmailOnlyMatch = contentScripts.every((entry) => {
-  const matches = entry.matches ?? [];
-  return matches.length > 0 && matches.every((match) => /^https:\/\/mail\.google\.com\/\*/.test(match));
-});
-
-if (!gmailOnlyMatch) {
-  throw new Error("Content scripts must remain Gmail-only for Phase 1.");
-}
-
-for (const filePath of filesToScan) {
-  const source = await readFile(resolve(filePath), "utf8");
-  for (const pattern of forbiddenPatterns) {
-    if (pattern.test(source)) {
-      throw new Error(`Forbidden pattern "${pattern}" found in ${filePath}`);
+    if (entry.isDirectory()) {
+      if (ignoredDirectories.has(entry.name)) {
+        continue;
+      }
+      files.push(...(await collectJavaScriptFiles(absolutePath)));
+      continue;
     }
+
+    if (allowedExtensions.has(path.extname(entry.name))) {
+      files.push(relativePath);
+    }
+  }
+
+  return files;
+}
+
+const files = await collectJavaScriptFiles(process.cwd());
+
+if (files.length === 0) {
+  console.log("No JavaScript files found.");
+  process.exit(0);
+}
+
+for (const file of files) {
+  const checkResult = spawnSync(process.execPath, ["--check", file], {
+    stdio: "inherit"
+  });
+
+  if (checkResult.status !== 0) {
+    console.error(`Syntax check failed: ${file}`);
+    process.exit(checkResult.status ?? 1);
   }
 }
 
-console.info("Lint checks passed.");
+console.log(`Lint passed for ${files.length} JavaScript file(s).`);

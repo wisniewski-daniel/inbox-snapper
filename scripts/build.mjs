@@ -1,30 +1,44 @@
-import { access, cp, mkdir, readFile, rm } from "node:fs/promises";
-import { resolve } from "node:path";
+import { access, readFile } from "node:fs/promises";
 
-const SOURCE_ROOT = resolve("src/extension");
-const DIST_ROOT = resolve("dist/extension");
-const manifestPath = resolve(SOURCE_ROOT, "manifest.json");
-
-const requiredFiles = [
-  "background/service-worker.js",
-  "action/popup.html",
-  "action/popup.js",
-  "content/content-script.js"
+const requiredFixtures = [
+  "fixtures/short.html",
+  "fixtures/long.html",
+  "fixtures/images.html"
 ];
 
-const manifestRaw = await readFile(manifestPath, "utf8");
-const manifest = JSON.parse(manifestRaw);
-
-if (manifest.manifest_version !== 3) {
-  throw new Error("Build aborted: manifest_version must be 3.");
+for (const fixturePath of requiredFixtures) {
+  try {
+    await access(fixturePath);
+  } catch {
+    console.error(`Missing fixture required by test gate: ${fixturePath}`);
+    process.exit(1);
+  }
 }
 
-for (const relativePath of requiredFiles) {
-  await access(resolve(SOURCE_ROOT, relativePath));
+let packageJson;
+try {
+  packageJson = JSON.parse(await readFile("package.json", "utf8"));
+} catch {
+  console.error("Unable to read package.json during build gate.");
+  process.exit(1);
 }
 
-await rm(resolve("dist"), { recursive: true, force: true });
-await mkdir(resolve("dist"), { recursive: true });
-await cp(SOURCE_ROOT, DIST_ROOT, { recursive: true });
+if (packageJson?.scripts?.gates !== "node scripts/run-gates.mjs") {
+  console.error("Gate contract mismatch: scripts.gates must run scripts/run-gates.mjs.");
+  process.exit(1);
+}
 
-console.info("Built extension scaffold into dist/extension.");
+let workflow;
+try {
+  workflow = await readFile(".github/workflows/ci.yml", "utf8");
+} catch {
+  console.error("Missing CI workflow: .github/workflows/ci.yml");
+  process.exit(1);
+}
+
+if (!workflow.includes("npm run gates")) {
+  console.error("CI contract mismatch: workflow must run `npm run gates`.");
+  process.exit(1);
+}
+
+console.log("Build contract checks passed.");

@@ -35,7 +35,19 @@ npm run lint
 npm run build
 ```
 
-If the implementation adds separate scripts later (e.g. `npm run test:fixtures`), list them here as well.
+Local and CI parity command (fail-fast, same sequence):
+
+```bash
+npm run gates
+```
+
+`npm run gates` runs the same required sequence and stops immediately if any gate fails:
+1. `npm test`
+2. `npm run lint`
+3. `npm run build`
+
+Fixture coverage is part of `npm test` via:
+- `tests/fixtures/fixture-gates.test.js`
 
 ## 2) Fixtures
 
