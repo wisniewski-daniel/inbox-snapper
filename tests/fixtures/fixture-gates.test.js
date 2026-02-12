@@ -1,23 +1,24 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
+import { loadAllFixtures, listFixtureDefinitions } from "./fixture-harness.mjs";
 
-const fixtureRoot = path.resolve(process.cwd(), "fixtures");
-const requiredFixtures = ["short.html", "long.html", "images.html"];
+const expectedCategories = ["image-heavy", "long", "short"];
 
 test("required fixture files are present and non-empty", async () => {
-  for (const fixtureName of requiredFixtures) {
-    const fixturePath = path.join(fixtureRoot, fixtureName);
-    const contents = await readFile(fixturePath, "utf8");
-    assert.ok(contents.length > 50, `${fixtureName} should not be blank`);
+  const fixtures = await loadAllFixtures();
+  for (const fixture of fixtures) {
+    assert.ok(fixture.normalizedHtml.length > 50, `${fixture.id} fixture should not be blank`);
   }
 });
 
 test("fixtures are HTML documents", async () => {
-  for (const fixtureName of requiredFixtures) {
-    const fixturePath = path.join(fixtureRoot, fixtureName);
-    const contents = await readFile(fixturePath, "utf8");
-    assert.match(contents.toLowerCase(), /<html[\s>]/, `${fixtureName} must contain <html>`);
+  const fixtures = await loadAllFixtures();
+  for (const fixture of fixtures) {
+    assert.match(fixture.normalizedHtml.toLowerCase(), /<html[\s>]/, `${fixture.id} must contain <html>`);
   }
+});
+
+test("fixture harness publishes canonical categories", () => {
+  const categories = [...new Set(listFixtureDefinitions().map((fixture) => fixture.category))].sort();
+  assert.deepEqual(categories, expectedCategories);
 });
